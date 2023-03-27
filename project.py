@@ -5,3 +5,6 @@ class Pokemon:
 
     def bark(self):
         pass    
+
+    def get_name(self):
+        pass
