@@ -163,4 +163,4 @@ if __name__ == '__main__':
 
     Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)]) # Get them to fight
 
-    print("Hello World!")
+  
