@@ -141,6 +141,7 @@ class Pokemon:
         money = np.random.choice(5000)
         delay_print(f"\nOpponent paid you ${money}.\n")
 
+print("Hello World!")
 
 
 
