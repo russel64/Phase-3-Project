@@ -139,12 +139,21 @@ class Pokemon:
                 delay_print("\n..." + self.name + ' fainted.')
                 break
 
-        money = np.random.choice(5000)
-        delay_print(f"\nOpponent paid you ${money}.\n")
+        money = np.random.choice(500)
+        if Pokemon2.bars <= 0: 
+            delay_print(f"\nOpponent paid you ${money}.\n")
+        else: 
+            delay_print(f"\nYou paid opponent ${money}.\n")
 
 
-
-
+        check = input("Would you like to battle again? Enter y to continue or press any other button to exit:")
+        if check.lower() == "y":
+            print("Prepare for next challenger!")
+            Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)])
+        else:
+            print("Thanks for playing!")
+            exit()
+   
 
 
 
@@ -160,7 +169,7 @@ if __name__ == '__main__':
 
     Charmeleon = Pokemon('Charmeleon', 'Fire', ['Ember', 'Scratch', 'Flamethrower', 'Fire Punch'],{'ATTACK':6, 'DEFENSE':5})
     Wartortle = Pokemon('Wartortle', 'Water', ['Bubblebeam', 'Water Gun', 'Headbutt', 'Surf'],{'ATTACK': 5, 'DEFENSE':5})
-    Ivysaur = Pokemon('Ivysaur\t', 'Grass', ['Vine Whip', 'Razor Leaf', 'Bullet Seed', 'Leech Seed'],{'ATTACK':4, 'DEFENSE':6})
+    Ivysaur = Pokemon('Ivysaur', 'Grass', ['Vine Whip', 'Razor Leaf', 'Bullet Seed', 'Leech Seed'],{'ATTACK':4, 'DEFENSE':6})
 
 
     Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)]) # Get them to fight
