@@ -1,10 +1,54 @@
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+
+from models import User, Base
+
 import time
 import numpy as np
 import sys
 import random
 
-# Delay printing
+engine = create_engine("sqlite:///Pokemon.db")
+Session = sessionmaker(bind=engine)
+session = Session()
 
+ # register a new user:
+trainer_num_list = []
+def register():
+    new_num = random.randint(1001, 9999)
+    if new_num not in trainer_num_list:
+        trainer_num_list.append(new_num)
+        user = User(new_num)
+        session.add(user)
+        session.commit()
+        print(f"Your TRAINER ID is {new_num}")
+        account(user)
+    else:
+        register()
+
+
+def login(num):
+    user = session.query(User).filter(User.trainer_number == num).all()
+    account(user)
+
+def account(user):
+    print(user)
+    # START BATTLE PROMPT - .fight function 
+    pass
+
+# START OF PROGRAM:
+print("\n")
+trainer_num = str(input('PLEASE LOGIN USING YOUR TRAINER ID ( If you wish to register, please enter "r" ): '))
+
+if trainer_num == 'r':
+    register()
+else:
+    num = int(trainer_num)
+    login(num)
+
+
+# Delay printing
 def delay_print(s):
     # print one character at a time
     # https://stackoverflow.com/questions/9246076/how-to-print-one-character-at-a-time-on-one-line
