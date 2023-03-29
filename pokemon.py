@@ -22,24 +22,32 @@ def register():
         user = User(new_num)
         session.add(user)
         session.commit()
+        print("Welcome to the world of Pokemon!")
         print(f"Your TRAINER ID is {new_num}")
         account(user)
     else:
         register()
 
+# print(session.query(User.trainer_number).filter(User.trainer_number).all())
 
 def login(num):
-    user = session.query(User).filter(User.trainer_number == num).all()
-    account(user)
+    if num in session.query(User.trainer_number).filter(User.trainer_number).all():
+        print(f"Welcome back Trainer #{user.trainer_number}")
+        user = session.query(User).filter(User.trainer_number == num).all()
+        account(user)
+    else:
+        print("Trainer ID does not exist, please try again")
 
 def account(user):
     print(user)
+    print("\n")
     # START BATTLE PROMPT - .fight function 
     pass
 
 # START OF PROGRAM:
 print("\n")
 trainer_num = str(input('PLEASE LOGIN USING YOUR TRAINER ID ( If you wish to register, please enter "r" ): '))
+print("\n")
 
 if trainer_num == 'r':
     register()
