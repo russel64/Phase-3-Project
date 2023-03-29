@@ -1,31 +1,29 @@
-from models import Base, Pokemon, Moveset, User
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Base, Pokemon, Stat, Move, User
 
-
-engine = create_engine("sqlite:///Pokemon.db")
-Base.metadata.create_all(bind = engine)
-Base = declarative_base
+engine = create_engine('sqlite:///pokemon.db')
+Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
 
 session.query(Pokemon).delete()
-session.query(Moveset).delete()
-session.query(User).delete()
+session.query(Move).delete()
+session.query(Stat).delete()
 
-p1 = Pokemon("Charizard")
-p2 = Pokemon("Blastoise")
-p3 = Pokemon("Venusaur")
-p4 = Pokemon("Billysaur")
+charizard = Pokemon(name='Charizard', type='Fire')
+charizard.moves = [Move(name='Flamethrower'), Move(name='Fly'), Move(name='Blast Burn'), Move(name='Fire Punch')]
+charizard.stats = [Stat(name='ATTACK', value=12), Stat(name='DEFENSE', value=8)]
 
-m1 = Moveset("FlameThrower")
+new_pokemon = Pokemon(name='Pikachu', type='Electric')
+new_pokemon.moves = [Move(name='Thunderbolt'), Move(name='Quick Attack'), Move(name='Iron Tail'), Move(name='Volt Tackle')]
+new_pokemon.stats = [Stat(name='ATTACK', value=6), Stat(name='DEFENSE', value=5)]
 
 u1 = User("1234")
 u2 = User("5678")
 
-session.add_all([m1])
-session.add_all([p1, p2, p3])
+session.add(new_pokemon)
+session.add(charizard)
 session.add_all([u1, u2])
 session.commit()
