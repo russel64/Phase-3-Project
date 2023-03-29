@@ -115,7 +115,8 @@ class Pokemon:
             print(f"Go {Pokemon2.name}!")
             for i, x in enumerate(Pokemon2.moves):
                 print(f"{i+1}.", x)
-            index = int(input('Pick a move: '))
+            rand = random.randint(1,4)
+            index = int(rand)
             delay_print(f"\n{Pokemon2.name} used {Pokemon2.moves[index-1]}!")
             time.sleep(1)
             delay_print(string_2_attack)
