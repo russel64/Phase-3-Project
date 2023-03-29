@@ -1,29 +1,28 @@
-from sqlalchemy import ForeignKey, Column, String, Integer
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
 class Pokemon(Base):
-    __tablename__ = "Pokemon"
+    __tablename__ = 'pokemon'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    type = Column(String)
+    moves = relationship('Move', back_populates='pokemon')
+    stats = relationship('Stat', back_populates='pokemon')
 
-    id = Column("key", Integer, primary_key = True)
-    pokemon = Column("Pokemon", String)
+class Move(Base):
+    __tablename__ = 'move'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    pokemon_id = Column(Integer, ForeignKey('pokemon.id'))
+    pokemon = relationship('Pokemon', back_populates='moves')
 
-    def __init__(self, pokemon):
-        self.pokemon = pokemon
-
-    def __repr__(self):
-        return f"{self.id} {self.pokemon}"
-    
-
-class Moveset(Base):
-    __tablename__ = "MoveSets"
-
-    id = Column("key", Integer, primary_key = True)
-    moveset = Column("MoveSet", String)
-
-    def __init__(self, moveset):
-        self.moveset = moveset
-
-    def __repr__(self):
-        return f"{self.id} {self.moveset}"
+class Stat(Base):
+    __tablename__ = 'stat'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    value = Column(Integer)
+    pokemon_id = Column(Integer, ForeignKey('pokemon.id'))
+    pokemon = relationship('Pokemon', back_populates='stats')

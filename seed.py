@@ -1,26 +1,16 @@
-from models import Base, Pokemon, Moveset
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Base, Pokemon, Stat, Move
 
-
-engine = create_engine("sqlite:///Pokemon.db")
-Base.metadata.create_all(bind = engine)
-Base = declarative_base
+engine = create_engine('sqlite:///pokemon.db')
+Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
 
-session.query(Pokemon).delete()
-session.query(Moveset).delete()
+charizard = Pokemon(name='Charizard', type='Fire')
+charizard.moves = [Move(name='Flamethrower'), Move(name='Fly'), Move(name='Blast Burn'), Move(name='Fire Punch')]
+charizard.stats = [Stat(name='ATTACK', value=12), Stat(name='DEFENSE', value=8)]
 
-p1 = Pokemon("Charizard")
-p2 = Pokemon("Blastoise")
-p3 = Pokemon("Venusaur")
-p4 = Pokemon("Billysaur")
-
-m1 = Moveset("FlameThrower")
-
-session.add_all([m1])
-session.add_all([p1, p2, p3])
+session.add(charizard)
 session.commit()
