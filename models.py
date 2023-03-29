@@ -43,5 +43,5 @@ class User(Base):
         User.trainers.append(self)
 
     def __repr__(self):
-        return f"(Trainer Number: {self.trainer_number}, Balance: {self.money})"
+        return f"(TRAINER ID: {self.trainer_number}, BALANCE: {self.money})"
     

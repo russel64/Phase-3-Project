@@ -1,11 +1,9 @@
-from sqlalchemy import create_engine, func
-from sqlalchemy import Column, Integer
-from sqlalchemy.ext.declarative import declarative_base
+
 import random
 # IMPORT USER TO USE CLASS
 from models import User, Base
 
-
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
@@ -22,20 +20,21 @@ def register():
     new_num = random.randint(1001, 9999)
     if new_num not in trainer_num_list:
         trainer_num_list.append(new_num)
-        User(new_num)
+        user = User(new_num)
+        session.add(user)
+        session.commit()
         print(f"Your TRAINER ID is {new_num}")
-        # SEND TO THEIR ACCOUNT = show trainer id and their balance 
+        account(user)
     else:
         register()
 
 
 def login(num):
-    info = session.query(User).filter(User.trainer_number == num).all()
-    account(info)
+    user = session.query(User).filter(User.trainer_number == num).all()
+    account(user)
 
-def account(info):
-    print(info)
-    # show tirainer id and their balance 
+def account(user):
+    print(user)
     # START BATTLE PROMPT - .fight function 
     pass
 
