@@ -27,3 +27,21 @@ class Moveset(Base):
 
     def __repr__(self):
         return f"{self.id} {self.moveset}"
+    
+class User(Base):
+
+    __tablename__ = 'users'
+    
+    id = Column(Integer, primary_key=True)
+    trainer_number = Column(Integer)
+    money = Column(Integer)
+
+    trainers = []
+    def __init__(self, trainer_number):
+        self.trainer_number = trainer_number
+        self.money = 5000
+        User.trainers.append(self)
+
+    def __repr__(self):
+        return f"(Trainer Number: {self.trainer_number}, Balance: {self.money})"
+    
