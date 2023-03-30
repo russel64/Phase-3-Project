@@ -13,40 +13,32 @@ engine = create_engine("sqlite:///Pokemon.db")
 Session = sessionmaker(bind=engine)
 session = Session()
 
- # register a new user:
-trainer_num_list = []
+# register a new user:
 def register():
     new_num = random.randint(1001, 9999)
-    if new_num not in trainer_num_list:
-        trainer_num_list.append(new_num)
+    counter = session.query(User).filter(User.trainer_number == new_num).count()
+    if counter != 1:
         user = User(new_num)
         session.add(user)
         session.commit()
+        print("Welcome to the world of Pokemon!")
+        print("\n")
         print(f"Your TRAINER ID is {new_num}")
+        print("\n")
         account(user)
     else:
         register()
 
-
-def login(num):
-    user = session.query(User).filter(User.trainer_number == num).all()
-    account(user)
-
-def account(user):
-    print(user)
-    # START BATTLE PROMPT - .fight function 
-    pass
-
-# START OF PROGRAM:
-print("\n")
-trainer_num = str(input('PLEASE LOGIN USING YOUR TRAINER ID ( If you wish to register, please enter "r" ): '))
-
-if trainer_num == 'r':
-    register()
-else:
-    num = int(trainer_num)
-    login(num)
-
+def login(num): 
+    counter = session.query(User).filter(User.trainer_number == num).count()
+    if counter == 1:
+        print(f"~ Welcome back Trainer #{num}! ~")
+        print("\n")
+        user = session.query(User).filter(User.trainer_number == num).all()
+        account(user)
+    else:
+        print("Trainer ID does not exist. Please try again")
+        init()
 
 # Delay printing
 def delay_print(s):
@@ -183,21 +175,53 @@ class Pokemon:
                 delay_print("\n..." + self.name + ' fainted.')
                 break
 
-        money = np.random.choice(500)
-        if Pokemon2.bars <= 0: 
-            delay_print(f"\nOpponent paid you ${money}.\n")
-        else: 
-            delay_print(f"\nYou paid opponent ${money}.\n")
+            money = np.random.choice(500)
+            if Pokemon2.bars <= 0: 
+                delay_print(f"\nOpponent paid you ${money}.\n")
+            else: 
+                delay_print(f"\nYou paid opponent ${money}.\n")
+
+            
+            check = input("Would you like to battle again? Enter y to continue or press any other button to exit:")
+            if check.lower() == "y":
+                print("Prepare for next challenger!")
+                Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)])
+            else:
+                print("Thanks for playing!")
+                exit()
+    
+
+# START OF PROGRAM:
+def init():
+    print("\n")
+    trainer_num = str(input('PLEASE LOGIN USING YOUR TRAINER ID ( If you wish to register, please enter "r" ): '))
+    print("\n")
+    if trainer_num == 'r':
+        register()
+    else:
+        num = int(trainer_num)
+        login(num)
+
+def account(user):
+    print(user)
+    print("\n")
+
+    # START BATTLE PROMPT:
+    check = input("To start a battle, enter 's' to start:")
+    if check.lower() == "s":
+        print("Preparing the next challenger!")
+        print(Pokemon.all)
+        # PELASE FIX AGTER CHRIS IS DONE (-:
+        Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)])
+    else:
+        print("\n")
+        print("Thanks for visiting!")
+        print("\n")
+        exit()
+
+init()
 
 
-        check = input("Would you like to battle again? Enter y to continue or press any other button to exit:")
-        if check.lower() == "y":
-            print("Prepare for next challenger!")
-            Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)])
-        else:
-            print("Thanks for playing!")
-            exit()
-   
 
 
 
@@ -216,6 +240,6 @@ if __name__ == '__main__':
     Ivysaur = Pokemon('Ivysaur', 'Grass', ['Vine Whip', 'Razor Leaf', 'Bullet Seed', 'Leech Seed'],{'ATTACK':4, 'DEFENSE':6})
 
 
-    Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)]) # Get them to fight
+    # Pokemon.all[random.randint(0,8)].fight(Pokemon.all[random.randint(0,8)]) # Get them to fight
 
   
