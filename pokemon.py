@@ -9,7 +9,7 @@ import numpy as np
 import sys
 import random
 
-engine = create_engine("sqlite:///Pokemon.db")
+engine = create_engine("sqlite:///pokemon.db")
 Session = sessionmaker(bind=engine)
 session = Session()
 
