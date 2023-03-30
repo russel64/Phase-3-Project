@@ -11,6 +11,7 @@ session = Session()
 session.query(Pokemon).delete()
 session.query(Move).delete()
 session.query(Stat).delete()
+session.query(User).delete()
 
 p1 = Pokemon(name='Bulbasaur', type='Grass')
 p1.moves = [Move(name='Vine Whip'), Move(name='Razor Leaf'), Move(name='Tackle'), Move(name='Leech Seed')]
@@ -24,9 +25,9 @@ p3 = Pokemon(name='Charmander', type='Fire')
 p3.moves = [Move(name='Ember'), Move(name='Scratch'), Move(name='Tackle'), Move(name='Fire Punch')]
 p3.stats = [Stat(name='ATTACK', value=4), Stat(name='DEFENSE', value=2)]
 
-p4 = Pokemon(name='Pikachu', type='Electric')
-p4.moves = [Move(name='Thunderbolt'), Move(name='Quick Attack'), Move(name='Iron Tail'), Move(name='Volt Tackle')]
-p4.stats = [Stat(name='ATTACK', value=4), Stat(name='DEFENSE', value=4)]
+# p4 = Pokemon(name='Pikachu', type='Electric')
+# p4.moves = [Move(name='Thunderbolt'), Move(name='Quick Attack'), Move(name='Iron Tail'), Move(name='Volt Tackle')]
+# p4.stats = [Stat(name='ATTACK', value=4), Stat(name='DEFENSE', value=4)]
 
 p5 = Pokemon(name='Chikorita', type='Grass')
 p5.moves = [Move(name='Vine Whip'), Move(name='Tackle'), Move(name='Grass Knot'), Move(name='Energy Ball')]
@@ -107,5 +108,5 @@ u2 = User("5678")
 
 
 session.add_all([u1, u2])
-session.add_all([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22])
+session.add_all([p1,p2,p3,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22])
 session.commit()
