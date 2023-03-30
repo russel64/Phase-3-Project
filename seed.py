@@ -16,7 +16,7 @@ p1 = Pokemon(name='Bulbasaur', type='Grass')
 p1.moves = [Move(name='Vine Whip'), Move(name='Razor Leaf'), Move(name='Tackle'), Move(name='Leech Seed')]
 p1.stats = [Stat(name='ATTACK', value=2), Stat(name='DEFENSE', value=4)]
 
-p2= Pokemon(name='p6', type='Water')
+p2= Pokemon(name='Squirtle', type='Water')
 p2.moves = [Move(name='Bubblebeam'), Move(name='Tackle'), Move(name='Headbutt'), Move(name='Surf')]
 p2.stats = [Stat(name='ATTACK', value=3), Stat(name='DEFENSE', value=3)]
 
@@ -105,5 +105,7 @@ p22.stats = [Stat(name='ATTACK', value=4), Stat(name='DEFENSE', value=2)]
 u1 = User("1234")
 u2 = User("5678")
 
+
+session.add_all([u1, u2])
 session.add_all([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22])
 session.commit()
