@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Base, Pokemon, Stat, Move
+from models import Base, Pokemon, Stat, Move, User
 
 engine = create_engine('sqlite:///pokemon.db')
 Base.metadata.create_all(bind=engine)
@@ -102,6 +102,8 @@ p22.stats = [Stat(name='ATTACK', value=4), Stat(name='DEFENSE', value=2)]
 
 
 
+u1 = User("1234")
+u2 = User("5678")
 
 session.add_all([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22])
 session.commit()
