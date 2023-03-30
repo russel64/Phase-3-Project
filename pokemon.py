@@ -22,6 +22,22 @@ def register():
         session.add(user)
         session.commit()
         print("Welcome to the world of Pokemon!")
+        print('''
+
+                                  ,'\                                   
+    _.----.        ____         ,'  _\   ___    ___     ____
+_,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
+\      __    \    '-.  | /   `.  ___    |    \/    |   '-.   \ |  |
+ \.    \ \   |  __  |  |/    ,','_  `.  |          | __  |    \|  |
+   \    \/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |
+    \     ,-'/  /   \    ,'   | \/ / ,`.|         /  /   \  |     |
+     \    \ |   \_/  |   `-.  \    `'  /|  |    ||   \_/  | |\    |
+      \    \ \      /       `-.`.___,-' |  |\  /| \      /  | |   |
+       \    \ `.__,'|  |`-._    `|      |__| \/ |  `.__,'|  | |   |
+        \_.-'       |__|    `-._ |              '-.|     '-.| |   |
+                                `'                            '-._|
+                                
+                                                                                    ''')
         print("\n")
         print(f"Your TRAINER ID is {new_num}")
         print("\n")
@@ -39,6 +55,7 @@ def login(num):
     else:
         print("Trainer ID does not exist. Please try again")
         init()
+
 
 # Delay printing
 def delay_print(s):
@@ -124,6 +141,9 @@ class Pokemon:
             for i, x in enumerate(self.moves):
                 print(f"{i+1}.", x)
             index = int(input('Pick a move: '))
+            while index > 4:
+                print("Please pick either 1, 2, 3, or 4")
+                index = int(input('Pick a move: '))
             delay_print(f"\n{self.name} used {self.moves[index-1]}!")
             time.sleep(1)
             delay_print(string_1_attack)
