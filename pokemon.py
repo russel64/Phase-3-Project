@@ -38,6 +38,22 @@ def account(user):
     pass
 
 # START OF PROGRAM:
+print('''
+
+                                  ,'\                                   
+    _.----.        ____         ,'  _\   ___    ___     ____
+_,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
+\      __    \    '-.  | /   `.  ___    |    \/    |   '-.   \ |  |
+ \.    \ \   |  __  |  |/    ,','_  `.  |          | __  |    \|  |
+   \    \/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |
+    \     ,-'/  /   \    ,'   | \/ / ,`.|         /  /   \  |     |
+     \    \ |   \_/  |   `-.  \    `'  /|  |    ||   \_/  | |\    |
+      \    \ \      /       `-.`.___,-' |  |\  /| \      /  | |   |
+       \    \ `.__,'|  |`-._    `|      |__| \/ |  `.__,'|  | |   |
+        \_.-'       |__|    `-._ |              '-.|     '-.| |   |
+                                `'                            '-._|
+                                
+                                                                                    ''')
 print("\n")
 trainer_num = str(input('PLEASE LOGIN USING YOUR TRAINER ID ( If you wish to register, please enter "r" ): '))
 
@@ -132,6 +148,9 @@ class Pokemon:
             for i, x in enumerate(self.moves):
                 print(f"{i+1}.", x)
             index = int(input('Pick a move: '))
+            while index > 4:
+                print("Please pick either 1, 2, 3, or 4")
+                index = int(input('Pick a move: '))
             delay_print(f"\n{self.name} used {self.moves[index-1]}!")
             time.sleep(1)
             delay_print(string_1_attack)
