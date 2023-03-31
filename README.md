@@ -14,7 +14,7 @@ Every pokemon has the following attributes:
 * Type (fire, water, grass)
 * Skillset (4 unique moves assigned to the Pokemon)
 * Stats (attack and defense)
-* Health (20 bars that the Pokemon will lose depening on the attack used)
+* Health (10 bars that the Pokemon will lose depening on the attack used)
 
 The player will be the first to attack in each match.  To begin, the player will select an attack assigned to either 1, 2, 3, or 4.  Once a pokemon has been attacked its health bar counter will decrease.  The amount of bars lost will depend on the stats of the attack and defense from each pokemon.  After the player's turn is over the computer will select an attack and the player's pokemon will lose health bars. 
 
